@@ -1,18 +1,19 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, Property } from '@mikro-orm/core';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { PrimaryKeyUuid } from '../modules/orm/decorators/primary-key-uuid.decorator';
 
 @Entity()
-// @ObjectType()
+@ObjectType()
 export class Message {
-  // @PrimaryKeyUuid()
-  // @Field(() => ID)
-  @PrimaryKey()
+  @PrimaryKeyUuid()
+  @Field(() => ID)
   public id!: string;
 
   @Property()
-  // @Field()
+  @Field()
   public content!: string;
 
   @Property()
-  // @Field(() => Date)
+  @Field(() => Date)
   public date!: Date;
 }

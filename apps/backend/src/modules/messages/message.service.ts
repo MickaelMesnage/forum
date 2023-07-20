@@ -1,6 +1,6 @@
 import { EntityManager } from '@mikro-orm/core';
 import { Injectable } from '@nestjs/common';
-import { Message } from 'src/entities/message.entity';
+import { Message } from '../../entities/message.entity';
 import { MessageCreateInput } from './inputs/message-create.input';
 
 @Injectable()

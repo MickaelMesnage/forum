@@ -45,7 +45,7 @@ export class MessageResolver {
 
   // @UseGuards(GqlAuthGuard)
   @Mutation(() => Message)
-  public async messageCreate(
+  public async createMessage(
     @Args({ name: 'input', type: () => MessageCreateInput })
     input: MessageCreateInput,
   ) {

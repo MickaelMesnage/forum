@@ -1,0 +1,27 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Message {
+  content: String!
+  date: DateTime!
+  id: ID!
+}
+
+input MessageCreateInput {
+  content: String!
+}
+
+type Mutation {
+  createMessage(input: MessageCreateInput!): Message!
+}
+
+type Query {
+  message(id: ID!): Message!
+  messages: [Message!]!
+}
