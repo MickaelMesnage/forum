@@ -2,9 +2,12 @@ overwrite: true
 schema: "http://localhost:3000/graphql"
 documents: "src/**/*.gql"
 generates:
+  src/generated/introspection.generated.ts:
+    plugins:
+      - "fragment-matcher"
   src/generated/graphql.ts:
     plugins:
-      - "typescript-common"
+      - "typescript-operations"
       - "typescript-react-apollo"
   ./graphql.schema.json:
     plugins:

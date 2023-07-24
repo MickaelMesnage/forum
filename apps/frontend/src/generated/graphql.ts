@@ -1,16 +1,17 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
-export type Maybe<T> = T | null;
+export type CreateMessageMutationVariables = Exact<{
+  input: MessageCreateInput;
+}>;
 
 
-export interface MessageCreateInput {
-  
-  content: string;
-}
+export type CreateMessageMutation = { __typename?: 'Mutation', createMessage: { __typename?: 'Message', id: string } };
 
-/** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-export type DateTime = any;
+export type MessageListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MessageListQuery = { __typename?: 'Query', messages: Array<{ __typename?: 'Message', id: string, content: string }> };
 
 
 export const CreateMessageDocument = gql`
@@ -46,3 +47,38 @@ export function useCreateMessageMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateMessageMutationHookResult = ReturnType<typeof useCreateMessageMutation>;
 export type CreateMessageMutationResult = Apollo.MutationResult<CreateMessageMutation>;
 export type CreateMessageMutationOptions = Apollo.BaseMutationOptions<CreateMessageMutation, CreateMessageMutationVariables>;
+export const MessageListDocument = gql`
+    query MessageList {
+  messages {
+    id
+    content
+  }
+}
+    `;
+
+/**
+ * __useMessageListQuery__
+ *
+ * To run a query within a React component, call `useMessageListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMessageListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMessageListQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMessageListQuery(baseOptions?: Apollo.QueryHookOptions<MessageListQuery, MessageListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MessageListQuery, MessageListQueryVariables>(MessageListDocument, options);
+      }
+export function useMessageListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MessageListQuery, MessageListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MessageListQuery, MessageListQueryVariables>(MessageListDocument, options);
+        }
+export type MessageListQueryHookResult = ReturnType<typeof useMessageListQuery>;
+export type MessageListLazyQueryHookResult = ReturnType<typeof useMessageListLazyQuery>;
+export type MessageListQueryResult = Apollo.QueryResult<MessageListQuery, MessageListQueryVariables>;
